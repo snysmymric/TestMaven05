@@ -1,34 +1,34 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
-
 import java.time.Duration;
 
 public class OpenWeatherTest extends BaseTest {
 
     @Test
     public void testGuidelink () {
-        String expectedResultLink = "https://openweathermap.org/guide";
-        String expectedResultTitle = "OpenWeatherMap API guide - " +
+        final String EXPECTED_RESULT_LINK = "https://openweathermap.org/guide";
+        final String EXPECTED_RESULT_TITLE = "OpenWeatherMap API guide - " +
                 "OpenWeatherMap";
 
-        WebElement guideLink = new WebDriverWait(getDriver(), Duration.ofSeconds(5))
+        WebElement guideLink = new WebDriverWait(getDriver(),Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.cssSelector(
                         "#first-level-nav a[href='/guide']")));
         guideLink.click();
 
-        Assert.assertEquals(getDriver().getCurrentUrl(),expectedResultLink);
-        Assert.assertEquals(getDriver().getTitle(),expectedResultTitle);
+        Assert.assertEquals(getDriver().getCurrentUrl(),EXPECTED_RESULT_LINK);
+        Assert.assertEquals(getDriver().findElement(By.className("body-orange")).getAttribute("baseURI")
+                ,EXPECTED_RESULT_LINK);
+        Assert.assertEquals(getDriver().getTitle(),EXPECTED_RESULT_TITLE);
     }
 
     @Test
     public void testSwitchToFTemperature() {
-        String expectedResult = "°F";
+        final String EXPECTED_RESULT = "°F";
 
         getDriver().findElement(By.cssSelector("div.switch-container>div:last" +
                 "-of-type")).click();
@@ -38,14 +38,14 @@ public class OpenWeatherTest extends BaseTest {
         String dewPoint = getDriver().findElement(By.cssSelector("ul[class" +
                         "^=\"weather-items\"]>li:nth-of-type(4)")).getText();
 
-        Assert.assertTrue(currentTem.contains(expectedResult));
-        Assert.assertTrue(feelsLikeTemp.contains(expectedResult));
-        Assert.assertTrue(dewPoint.contains(expectedResult));
+        Assert.assertTrue(currentTem.contains(EXPECTED_RESULT));
+        Assert.assertTrue(feelsLikeTemp.contains(EXPECTED_RESULT));
+        Assert.assertTrue(dewPoint.contains(EXPECTED_RESULT));
     }
 
     @Test
     public void testSwitchToCTemperature() {
-        String expectedResult = "°C";
+        final String EXPECTED_RESULT = "°C";
 
         getDriver().findElement(By.cssSelector("div.switch-container>div" +
                 ":nth-of-type(2)")).click();
@@ -55,8 +55,8 @@ public class OpenWeatherTest extends BaseTest {
         String dewPoint = getDriver().findElement(By.cssSelector("ul[class" +
                 "^=\"weather-items\"]>li:nth-of-type(4)")).getText();
 
-        Assert.assertTrue(currentTem.contains(expectedResult));
-        Assert.assertTrue(feelsLikeTemp.contains(expectedResult));
-        Assert.assertTrue(dewPoint.contains(expectedResult));
+        Assert.assertTrue(currentTem.contains(EXPECTED_RESULT));
+        Assert.assertTrue(feelsLikeTemp.contains(EXPECTED_RESULT));
+        Assert.assertTrue(dewPoint.contains(EXPECTED_RESULT));
     }
 }
