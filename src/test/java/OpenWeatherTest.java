@@ -10,7 +10,7 @@ import java.time.Duration;
 public class OpenWeatherTest extends BaseTest {
 
     @Test
-    public void testGuidelink () {
+    public void testGuideLink () {
         final String EXPECTED_RESULT_LINK = "https://openweathermap.org/guide";
         final String EXPECTED_RESULT_TITLE = "OpenWeatherMap API guide - " +
                 "OpenWeatherMap";
